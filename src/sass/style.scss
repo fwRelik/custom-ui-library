@@ -1,0 +1,14 @@
+// Импорт сабирательных файлов.
+// Import custom files.
+
+// Генеральный файл: Шрифты, Переменные, Базовые значение стилей.
+// General file: Fonts, Variables, Base style values.
+@import './general/general.scss';
+
+// Вспомогательные стилизации.
+// Helper styling.
+@import './helpers/classes.scss';
+
+// Стили компонентов.
+// Component styles.
+@import './components/ui.scss';

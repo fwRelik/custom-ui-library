@@ -1,0 +1,26 @@
+// Технический собирательный файл.
+// Technical collection file.
+
+// Выравнивание по центру: Блок, Текст.
+// Center alignment: Block, Text.
+@import './align.scss';
+
+// Стили классов состояние элемента.
+// Class styles element state.
+@import './display.scss';
+
+// Стили Шрифтов.
+// Font Styles.
+@import './font.scss';
+
+// Стили Наружных Отступов.
+// Styling Outside Padding.
+@import './margin.scss';
+
+// Стили Внутренних Отступов.
+// Styles Padding.
+@import './padding.scss';
+
+// Стили Размеров Блока.
+// Block Size Styles.
+@import './sizes.scss';

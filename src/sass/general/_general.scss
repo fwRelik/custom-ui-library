@@ -1,0 +1,14 @@
+// Технический собирательный файл.
+// Technical collection file.
+
+// Генеральный Файл стилей.
+// General Style File.
+@import './general/base.scss';
+
+// Стандартные переменные.
+// Standard variables.
+@import './general/variables.scss';
+
+// Файл с подключением шрифтов.
+// File with fonts included.
+@import './general/typography.scss';
