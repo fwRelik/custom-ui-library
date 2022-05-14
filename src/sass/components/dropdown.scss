@@ -1,0 +1,96 @@
+.dropdown {
+    position: relative;
+    display: inline-block;
+
+    &-toggle {
+        &-down {
+            &::after {
+                content: '';
+                display: inline-block;
+                margin-left: 5px;
+                vertical-align: 2px;
+                border-top: 4px solid;
+                border-right: 4px solid transparent;
+                border-bottom: 0;
+                border-left: 4px solid transparent;
+            }
+        }
+
+        &-left {
+            &::after {
+                content: '';
+                display: inline-block;
+                margin-left: 5px;
+                vertical-align: 1px;
+                border-top: 4px solid transparent;
+                border-right: 0;
+                border-bottom: 4px solid transparent;
+                border-left: 4px solid;
+            }
+        }
+
+        &-right {
+            &::after {
+                content: '';
+                display: inline-block;
+                margin-left: 5px;
+                vertical-align: 1px;
+                border-top: 4px solid transparent;
+                border-right: 4px solid;
+                border-bottom: 4px solid transparent;
+                border-left: 0;
+            }
+        }
+
+        &-up {
+            &::after {
+                content: '';
+                display: inline-block;
+                margin-left: 5px;
+                vertical-align: 2px;
+                border-top: 0;
+                border-right: 4px solid transparent;
+                border-bottom: 4px solid;
+                border-left: 4px solid transparent;
+            }
+        }
+    }
+
+    &-menu {
+        position: absolute;
+        top: 100%;
+        left: 0%;
+        z-index: 2;
+        display: none;
+        border: 1px solid rgba(0, 0, 0, .15);
+        border-radius: 2px;
+        background-color: $w;
+        min-width: 100%;
+        padding: 10px 0;
+
+        &-left {
+            top: 0%;
+            left: 100%;
+        }
+
+        &-right {
+            top: 0%;
+            left: revert;
+            right: 100%
+        }
+    }
+
+    &-item {
+        display: block;
+        width: 100%;
+        padding: 7px 10px;
+        color: $dark;
+        background-color: inherit;
+        border: 0;
+        text-decoration: none;
+
+        &:hover {
+            background-color: rgba(0, 0, 0, .05);
+        }
+    }
+}
