@@ -1,13 +1,13 @@
 // Технический файл для устранение проблем прокрутки страницы.
 // Technical file for troubleshooting page scrolling issues.
 
-// Импорт ядра для использование $ функций.
-// Import core to use $ functions.
-import $ from '../core';
+// Импорт ядра для использование _$ функций.
+// Import core to use _$ functions.
+import _$ from '../core';
 
 // Внутри Программная функция.
 // Inside Program function.
-$.prototype.scrollRep = function () {
+_$.prototype.scrollRep = function () {
     if (document.body.offsetHeight > window.innerHeight) {
 
         let div = document.createElement('div');

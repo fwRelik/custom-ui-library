@@ -1,13 +1,13 @@
-// Импорт ядра для использование $ функций.
-// Import core to use $ functions.
-import $ from '../core';
+// Импорт ядра для использование _$ функций.
+// Import core to use _$ functions.
+import _$ from '../core';
 
 // Планируется расширить функционал анимаций в виде кривой графики.
 // It is planned to expand the functionality of animations in the form of curved graphics.
 
 // Внутри Программная функция.
 // Inside Program function.
-$.prototype.animateOverTime = function (dur, cb, fin) {
+_$.prototype.animateOverTime = function (dur, cb, fin) {
     let timeStart;
 
     function _animateOverTime(time) {
@@ -34,7 +34,7 @@ $.prototype.animateOverTime = function (dur, cb, fin) {
 
 // Плавное появление в заданном интервале указанного элемента.
 // Smooth appearance in the specified interval of the specified element.
-$.prototype.fadeIn = function (dur, display = 'block', fin) {
+_$.prototype.fadeIn = function (dur, display = 'block', fin) {
     for (let i = 0; i < this.length; i++) {
         this[i].style.display = display;
 
@@ -51,7 +51,7 @@ $.prototype.fadeIn = function (dur, display = 'block', fin) {
 
 // Плавное скрытие в заданном интервале указанного элемента.
 // Smooth hiding in the given interval of the specified element.
-$.prototype.fadeOut = function (dur, fin) {
+_$.prototype.fadeOut = function (dur, fin) {
     for (let i = 0; i < this.length; i++) {
 
         const _fadeOut = (complection) => {
@@ -70,12 +70,12 @@ $.prototype.fadeOut = function (dur, fin) {
 
 // Плавное переключение между состояниями отображение в заданном интервале указанного элемента.
 // Smooth switching between the display states in the specified interval of the specified element.
-$.prototype.fadeToggle = function (dur, display = 'block', fin) {
+_$.prototype.fadeToggle = function (dur, display = 'block', fin) {
     for (let i = 0; i < this.length; i++) {
         if (window.getComputedStyle(this[i]).display === 'none') {
-            $(this[i]).fadeIn(dur, display, fin);
+            _$(this[i]).fadeIn(dur, display, fin);
         } else {
-            $(this[i]).fadeOut(dur, fin);
+            _$(this[i]).fadeOut(dur, fin);
         }
     }
     return this;

@@ -1,18 +1,18 @@
-// Импорт ядра для использование $ функций.
-// Import core to use $ functions.
-import $ from '../core';
+// Импорт ядра для использование _$ функций.
+// Import core to use _$ functions.
+import _$ from '../core';
 
 // Реализация DropDown Меню.
 // Implementation of the DropDown Menu.
-$.prototype.dropdown = function () {
+_$.prototype.dropdown = function () {
     for (let i = 0; i < this.length; i++) {
-        const id = $(this[i]).getAttr('id');
-        $(this[i]).click((e) => {
-            $(`[data-toggle-id="${id}"]`).fadeToggle(300);
+        const id = _$(this[i]).getAttr('id');
+        _$(this[i]).click((e) => {
+            _$(`[data-toggle-id="${id}"]`).fadeToggle(300);
 
-            $(e.target).siblings().find('.dropdown-item').click((e) => {
+            _$(e.target).siblings().find('.dropdown-item').click((e) => {
                 if (e.target.tagName !== 'BUTTON') {
-                    $(`[data-toggle-id="${id}"]`).fadeOut(300);
+                    _$(`[data-toggle-id="${id}"]`).fadeOut(300);
                     return;
                 }
             });
@@ -22,4 +22,4 @@ $.prototype.dropdown = function () {
 
 // Начальная инициализация DropDown Меню.
 // Initialization DropDown Menu.
-// $('.dropdown-toggle').dropdown();
+// _$('.dropdown-toggle').dropdown();

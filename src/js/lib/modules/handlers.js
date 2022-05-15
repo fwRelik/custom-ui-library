@@ -1,10 +1,10 @@
-// Импорт ядра для использование $ функций.
-// Import core to use $ functions.
-import $ from '../core';
+// Импорт ядра для использование _$ функций.
+// Import core to use _$ functions.
+import _$ from '../core';
 
 // Создание обработчика событий.
 // Create an event handler.
-$.prototype.on = function (eventName, callback) {
+_$.prototype.on = function (eventName, callback) {
     if (!eventName || !callback) {
         return this;
     }
@@ -20,7 +20,7 @@ $.prototype.on = function (eventName, callback) {
 
 // Удаление обработчика событий.
 // Removing the event handler.
-$.prototype.off = function (eventName, callback) {
+_$.prototype.off = function (eventName, callback) {
     if (!eventName || !callback) {
         return this;
     }
@@ -36,7 +36,7 @@ $.prototype.off = function (eventName, callback) {
 
 // Готовый обработчик событий клика.
 // Ready click event handler.
-$.prototype.click = function (handler) {
+_$.prototype.click = function (handler) {
     for (let i = 0; i < this.length; i++) {
         if (!this[i].addEventListener) {
             continue;

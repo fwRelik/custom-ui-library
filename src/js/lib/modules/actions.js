@@ -1,10 +1,10 @@
-// Импорт ядра для использование $ функций.
-// Import core to use $ functions.
-import $ from '../core';
+// Импорт ядра для использование _$ функций.
+// Import core to use _$ functions.
+import _$ from '../core';
 
 // Для получения массива из контекста.
 // To get an array from the context.
-$.prototype.getArray = function () {
+_$.prototype.getArray = function () {
     let array = [];
 
     array.push(Object.values(this));
@@ -12,9 +12,9 @@ $.prototype.getArray = function () {
     return array[0].slice(0, -1);
 }
 
-// Функция для редактирование HTML эелементов, если не передавать контет то вернет HTML струкруту указонного элемента через функцию $(). 
-// Function for editing HTML elements, if no content is passed, it will return the HTML structure of the specified element via the $() function.
-$.prototype.html = function (content) {
+// Функция для редактирование HTML эелементов, если не передавать контет то вернет HTML струкруту указонного элемента через функцию _$(). 
+// Function for editing HTML elements, if no content is passed, it will return the HTML structure of the specified element via the _$() function.
+_$.prototype.html = function (content) {
     for (let i = 0; i < this.length; i++) {
         if (content) {
             this[0].innerHTML = content;
@@ -28,7 +28,7 @@ $.prototype.html = function (content) {
 
 // Предоставит элемент по указанному номеру порядка нахождение в document, начиная с 0.
 // Gives the element at the specified order number found in document, starting at 0.
-$.prototype.eq = function (i) {
+_$.prototype.eq = function (i) {
     const swap = this[i];
     const objLength = Object.keys(this).length;
 
@@ -44,7 +44,7 @@ $.prototype.eq = function (i) {
 
 // Определяет порядковый номер нахождение в родительском элементе.
 // Determines the ordinal location in the parent element.
-$.prototype.index = function () {
+_$.prototype.index = function () {
     const parent = this[0].parentNode,
         childs = [...parent.children];
 
@@ -55,9 +55,9 @@ $.prototype.index = function () {
     return childs.findIndex(findMyIndex)
 };
 
-// Удаляет элемент указанный через функцию $().
-// Removes the element specified via the $() function.
-$.prototype.remove = function () {
+// Удаляет элемент указанный через функцию _$().
+// Removes the element specified via the _$() function.
+_$.prototype.remove = function () {
     for (let i = 0; i < this.length; i++) {
         this[i].remove();
     }
@@ -67,7 +67,7 @@ $.prototype.remove = function () {
 
 // Добавляет элемент в указанного родителя.
 // Adds an element to the specified parent.
-$.prototype.append = function (...appended) {
+_$.prototype.append = function (...appended) {
     for (let i = 0; i < this.length; i++) {
         this[i].append(...appended);
     }
@@ -77,7 +77,7 @@ $.prototype.append = function (...appended) {
 
 // Находит в родительском элементе по переданному селектору.
 // Finds in the parent element by the passed selector.
-$.prototype.find = function (selector) {
+_$.prototype.find = function (selector) {
     let numberOfItems = 0,
         counter = 0;
 
@@ -109,7 +109,7 @@ $.prototype.find = function (selector) {
 
 // Находит родителя указанного элемента.
 // Finds the parent of the specified element.
-$.prototype.closest = function (selector) {
+_$.prototype.closest = function (selector) {
     let counter = 0;
 
     for (let i = 0; i < this.length; i++) {
@@ -127,7 +127,7 @@ $.prototype.closest = function (selector) {
 
 // Вернет все соседние элементы своего родителя.
 // Return all adjacent elements of its parent.
-$.prototype.siblings = function () {
+_$.prototype.siblings = function () {
     let numberOfItems = 0,
         counter = 0;
 

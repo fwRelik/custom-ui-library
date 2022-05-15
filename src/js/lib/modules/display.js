@@ -1,10 +1,10 @@
-// Импорт ядра для использование $ функций.
-// Import core to use $ functions.
-import $ from '../core';
+// Импорт ядра для использование _$ функций.
+// Import core to use _$ functions.
+import _$ from '../core';
 
 // Автоматически будет подставлять значение для отображение указанного элемента.
 // Will automatically substitute the value to display the specified element.
-$.prototype.show = function () {
+_$.prototype.show = function () {
     for (let i = 0; i < this.length; i++) {
         if (!this[i].style) {
             continue;
@@ -17,7 +17,7 @@ $.prototype.show = function () {
 
 // Грубое скрытие указанного элемента.
 // Roughly hide the specified element.
-$.prototype.hide = function () {
+_$.prototype.hide = function () {
     for (let i = 0; i < this.length; i++) {
         if (!this[i].style) {
             continue;
@@ -30,7 +30,7 @@ $.prototype.hide = function () {
 
 // Скрывает указанный элемент.
 // Hides the specified element.
-$.prototype.visibleHide = function () {
+_$.prototype.visibleHide = function () {
     for (let i = 0; i < this.length; i++) {
         if (!this[i].style) {
             continue;
@@ -44,7 +44,7 @@ $.prototype.visibleHide = function () {
 
 // Грубое переключение между состояниями отображение указанного элемента.
 // Rough switching between display states of the specified element.
-$.prototype.toggle = function () {
+_$.prototype.toggle = function () {
     for (let i = 0; i < this.length; i++) {
         if (!this[i].style) {
             continue;

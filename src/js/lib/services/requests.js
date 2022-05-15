@@ -1,10 +1,10 @@
-// Импорт ядра для использование $ функций.
-// Import core to use $ functions.
-import $ from '../core';
+// Импорт ядра для использование _$ функций.
+// Import core to use _$ functions.
+import _$ from '../core';
 
 // Отправка запросов на сервер, с возвратом определенного типа указанных данных.
 // Sending requests to the server, returning a certain type of specified data.
-$.prototype.get = async function (url, dataTypeAnswer = 'json') {
+_$.prototype.get = async function (url, dataTypeAnswer = 'json') {
     let res = await fetch(url);
 
     if (!res.ok) {
@@ -23,7 +23,7 @@ $.prototype.get = async function (url, dataTypeAnswer = 'json') {
 
 // Отправка данных в указанный адрес.
 // Sending data to the specified address.
-$.prototype.post = async function (url, data, dataTypeAnswer = 'text') {
+_$.prototype.post = async function (url, data, dataTypeAnswer = 'text') {
     let res = await fetch(url, {
         method: 'POST',
         body: data
