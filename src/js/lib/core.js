@@ -3,15 +3,15 @@
 // Ядро, логика по наследовании.
 // Core, inheritance logic.
 
-// Создание основной функции $.
-// Create main function $.
-const $ = function (selector) {
-    return new $.prototype.init(selector);
+// Создание основной функции _$.
+// Create main function _$.
+const _$ = function (selector) {
+    return new _$.prototype.init(selector);
 };
 
 // Функция добавления элементов для контекста.
 // Function for adding elements for the context.
-$.prototype.init = function (selector) {
+_$.prototype.init = function (selector) {
 
     // При отсутствии селектора вернет пустой объект.
     // If there is no selector, it will return an empty object.
@@ -51,12 +51,12 @@ $.prototype.init = function (selector) {
 
 // Для наследование методов.
 // For method inheritance.
-$.prototype.init.prototype = $.prototype;
+_$.prototype.init.prototype = _$.prototype;
 
-// Глобализация функции $.
-// Globalization of the function $.
-window.$ = $;
+// Глобализация функции _$.
+// Globalization of the function _$.
+window._$ = _$;
 
 // Экспорт функции по умолчанию.
 // Export the default function.
-export default $;
+export default _$;

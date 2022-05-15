@@ -1,26 +1,29 @@
-// Импорт ядра для использование $ функций.
-// Import core to use $ functions.
-import $ from '../core';
+// Импорт ядра для использование _$ функций.
+// Import core to use _$ functions.
+import _$ from '../core';
 
 // Создание Уведомлений
-$.prototype.notification = function ({ message = null, status = '', cClass = [], timeout = 1000 } = {}) {
+_$.prototype.notification = function ({ message = null, status = '', cClass = null, timeout = 4000, options: { _wrapClass = 'wrap_notifications', _mainClass = 'notification' } } = {}) {
     if (status === '') status = 'primary';
 
     let wrapField;
-    if (document.querySelector('.wrap_notifications')) {
-        wrapField = document.querySelector('.wrap_notifications');
+    if (document.querySelector(`.${_wrapClass}`)) {
+        wrapField = document.querySelector(`.${_wrapClass}`);
     } else {
         wrapField = document.createElement('div');
-        $(wrapField).addClass('wrap_notifications');
+        _$(wrapField).addClass(_wrapClass);
         document.body.appendChild(wrapField);
     }
 
     const field = document.createElement('div');
-    $(field).addClass('notification');
+    _$(field).addClass(_mainClass);
 
-    if (status) {
-        $(field).addClass(...cClass);
+    if (cClass) {
+        _$(field).addClass(...cClass);
     }
+
+    // Добавление иконок в начало уведомлений.
+    // Adding icons to the top of notifications.
 
     let icon;
     switch (status) {
@@ -44,10 +47,10 @@ $.prototype.notification = function ({ message = null, status = '', cClass = [],
             break;
     }
 
-    $(field).html(`
-            <div class="notification-body notification-${status}">
-                <div class="notification-icon">${icon}</div>
-                <div class="notification-message">${message}</div>
+    _$(field).html(`
+            <div class="${_mainClass}-body ${_mainClass}-${status}">
+                <div class="${_mainClass}-icon">${icon}</div>
+                <div class="${_mainClass}-message">${message}</div>
             </div>
         `);
 
@@ -71,19 +74,19 @@ $.prototype.notification = function ({ message = null, status = '', cClass = [],
     }
 
     function _remove_notification() {
-        $(field).addClass('notification-dismissal');
+        _$(field).addClass(`${_mainClass}-dismissal`);
 
         setTimeout(() => {
-            $(field).remove();
+            _$(field).remove();
 
-            if ($('.notification').length === 0) {
-                $(wrapField).remove();
+            if (_$(`.${_mainClass}`).length === 0) {
+                _$(wrapField).remove();
             }
         }, 1000);
     }
 
     const funcs = [_click, _mouseEnter, _mouseLeave];
     ['click', 'mouseenter', 'mouseleave'].forEach((event, i) => {
-        $(field).on(event, funcs[i]);
+        _$(field).on(event, funcs[i]);
     });
 }

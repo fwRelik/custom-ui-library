@@ -1,6 +1,6 @@
-// Импорт ядра для использование $ функций.
-// Import core to use $ functions.
-import $ from './core';
+// Импорт ядра для использование _$ функций.
+// Import core to use _$ functions.
+import _$ from './core';
 
 // Импорт Модулей.
 // Import Modules.
@@ -27,4 +27,4 @@ import './services/requests';
 
 // Экспорт Функции для использование в основном скрипте.
 // Export Functions for use in the main script.
-export default $;
+export default _$;

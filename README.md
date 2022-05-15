@@ -2,13 +2,29 @@
 
 ## Get Started
 
+Ready files can be found in the dist folder.
+
 > To connect, you need to add the script file to the main script file or to the html page.
-> The same goes for styles. They need to be included in the main stylesheet or html page
+> The same goes for styles. They need to be included in the main stylesheet or html page.
+
 --- 
+
+Docs Link:
+
+- [Dropdown Button](#dropdown-button-example)
+- [Modal](#modal-example)
+    - [Dynamic Create Modal](#dynamic-create-modal)
+- [Tabs](#tabs-example)
+- [Accordion](#accordion-example)
+- [Carousel](#carousel-example)
+    - [Dynamic Create Carousel](#dynamic-create-carousel)
+- [Notifications](#notifications-example)
+
+---
 
 ## Dropdown Button Example
 
-`HTML`
+**HTML:**
 ```HTML
 <div class="dropdown">
     <button class="btn btn-primary dropdown-toggle dropdown-toggle-down" id="dropdownMenuButton">
@@ -22,29 +38,33 @@
 </div>
 ```
 
-`JavaScript Initialization`
+**JavaScript Initialization:**
 ```JavaScript
-$('.dropdown-toggle').dropdown();
+_$('.dropdown-toggle').dropdown();
 ```
+
+> Note: 
+- Simple initialization takes nothing as an argument.
 
 ---
 
 ## Modal Example 
 
-`Modal Target HTML`
+**Modal Target HTML:**
 ```HTML
 <a href="#" 
     id="trigger" 
     class="btn btn-primary" 
     data-toggle="modal"
-    ata-target="#exampleModal">Link to</a>
+    data-target="#exampleModal">Open Modal</a>
 ```
 
-`Modal HTML`
+**Modal HTML:**
 ```HTML
 <div class="modal" id="exampleModal">
     <div class="modal-dialog">
-        <div class="modal-content"><button class="close" data-close>
+        <div class="modal-content">
+            <button class="close" data-close>
                 <span>&times;</span>
             </button>
             <div class="modal-header">
@@ -64,16 +84,85 @@ $('.dropdown-toggle').dropdown();
 </div>
 ```
 
-`JavaScript Initialization`
+**JavaScript Initialization:**
 ```JavaScript
-$('[data-toggle="modal"]').modal();
+_$('[data-toggle="modal"]').modal();
+```
+
+> Note: 
+- Simple initialization takes nothing as an argument.
+#
+
+## Dynamic Create Modal
+Can be used when you need to create modals dynamically.
+
+**JavaScript Dunamically Create Modals:**
+```JavaScript
+_$().createModal();
+```
+> Note:
+- Accepts an object with settings.
+#
+
+## Settings createModal
+
+Option | Type | Default | Description
+------ | ---- | ------- | -----------
+text | object | { } | Object for assigning text to the modals.
+title | string | null | Destination title. 
+body | string | null | Destination description.
+btns | object | { } | Button settings object.
+count | int | null | Number of Buttons.
+settings | array | null | Array to customize each button.
+
+**HTML Target:**
+```HTML
+<a href="#" 
+    id="trigger" 
+    class="btn btn-primary" 
+    data-toggle="modal"
+    data-target="#exampleModal">Open Modal</a>
+```
+
+**JavaScript Dynamically Create Modals Example:**
+```JavaScript
+_$('#trigger').click(() => _$('#trigger').createModal({
+        text: {
+            title: 'Title',
+            body: 'Body Description'
+        },
+        btns: {
+            count: 2,
+            settings: [
+                [   // Button Text.
+                    'Cancel', 
+                    // Buttons Classes.
+                    ['btn', 'btn-outline-primary', 'mr-20'], 
+                    // Close after clicking.
+                    true 
+                ],
+                [   // Button Text.
+                    'Ok', 
+                    // Buttons Classes.
+                    ['btn', 'btn-outline-primary'], 
+                    // Close after clicking.
+                    true, 
+                    // Callback
+                    () => { 
+                        alert('Worked !');
+                    }
+                ]
+            ]
+        }
+    });
+);
 ```
 
 ---
 
 ## Tabs Example
 
-`HTML`
+**HTML:**
 ```HTML
 <div class="tab mt-20 block-center">
     <div class="tab-panel" data-tabpanel="">
@@ -93,16 +182,19 @@ $('[data-toggle="modal"]').modal();
 </div>
 ```
 
-`JavaScript Initialization`
+**JavaScript Initialization:**
 ```JavaScript
-$('[data-tabpanel] .tab-item').tab();
+_$('[data-tabpanel] .tab-item').tab();
 ```
+
+> Note: 
+- Simple initialization takes nothing as an argument.
 
 ---
 
 ## Accordion Example
 
-`HTML`
+**HTML:**
 ```HTML
 <div class="accordion mt-20 block-center">
     <div class="accordion-head">
@@ -124,16 +216,33 @@ $('[data-tabpanel] .tab-item').tab();
 </div>
 ```
 
-`JavaScript Initialization`
+**JavaScript Initialization:**
 ```JavaScript
-$('.accordion-head').accordion();
+_$('.accordion-head').accordion();
+```
+
+### Settings Accordion
+
+Option | Type | Default | Description
+------ | ---- | ------- | -----------
+headActive | string | .accordion-head--active | Head Active class
+contentActive | string | .accordion-content--active | Content Active Class
+paddings | int | 40 | Defines the padding from the bottom.
+
+**JavaScript Accordion Example:**
+```JavaScript
+_$('.accordion-head').accordion({
+    paddings: 40,
+    headActive: 'accordion-head--active',
+    contentActive: 'accordion-content--active'
+    });
 ```
 
 ---
 
 ## Carousel Example
 
-`HTML`
+**HTML:**
 ```HTML
 <div class="carousel" id="example">
     <ol class="carousel-indicators">
@@ -171,7 +280,146 @@ $('.accordion-head').accordion();
 </div>
 ```
 
-`JavaScript Initialization`
+**JavaScript Initialization:**
 ```JavaScript
-$('.carousel').carousel();
+_$('#example').carousel();
+```
+
+> Note:
+- If there is layout in html.
+- Accepts an object with settings.
+#
+
+### Settings Carousel
+
+Option | Type | Default | Description
+------ | ---- | ------- | -----------
+options | object | { } | Accepts an object with settings.
+round | boolean | false | Constant repetition in a circle.
+reverse | boolean | false | Constant repetition in a circle in the opposite direction.
+autoplay | boolean | false | Automatic switching.
+duration | int | 4000 | Interval switching.
+
+**JavaScript Initialization Example:**
+```JavaScript
+_$('#example').carousel({
+    options: {
+        round: true,
+        reverse: true,
+        autoplay: true,
+        duration: 1000
+    }
+});
+```
+---
+
+## Dynamic Create Carousel
+
+Can be used when you need to dynamically create.
+
+**JavaScript Dynamically Create Carousel:**
+```JavaScript
+_$().createCarousel();
+```
+
+> Note:
+- Accepts an object with settings.
+- There must be an initial layout in order to create inside.
+#
+
+### Settings createCarousel
+
+Option | Type | Default | Description
+------ | ---- | ------- | -----------
+round | boolean | false | Constant repetition in a circle.
+reverse | boolean | false | Constant repetition in a circle in the opposite direction.
+autoplay | boolean | false | Automatic switching.
+duration | int | 4000 | Interval switching.
+navigationDot | boolean | null | Navigation buttons.
+switching | boolean | null | Switch buttons. In case of false, the buttons are simply hidden from the layout.
+count | int | null | Determine quantity slides.
+settings | array | null | Accepts an array with the settings for each slide.
+
+**HTML:**
+```HTML
+<div class="carousel" id="example"></div>
+```
+**JavaScript Dynamically Create Carousel Example:**
+```JavaScript
+_$('#example').createCarousel({
+    options: {
+        round: true,
+        reverse: true,
+        autoplay: true,
+        duration: 1000
+    },
+    content: {
+        navigationDot: true,
+        switching: true,
+        count: 3,
+        settings: [
+            [   // Classes.
+                ['first_class', 'second_class'], 
+                // Src Attribute
+                './assets/1.jpg', 
+                // Alt Attribute.
+                'Slider #1', 
+            ],
+            [   // Classes.
+                ['first_class', 'second_class'], 
+                // Src Attribute
+                './assets/2.jpg', 
+                // Alt Attribute.
+                'Slider #2 ', 
+            ],
+            [   // Classes.
+                ['first_class', 'second_class'], 
+                // Src Attribute
+                './assets/3.jpg', 
+                // Alt Attribute.
+                'Slider #3', 
+            ]
+        ]
+    }
+});
+```
+
+---
+
+## Notifications Example
+
+> Notifications use Font Awesome Icons, you can find [them here.](https://github.com/fwmiva/ifo)
+
+**JavaScript Call Notifications:**
+```JavaScript
+_$().notification();
+```
+> Note:
+- Accepts an object with settings.
+#
+
+### Settings Notifications
+
+Option | Type | Default | Description
+------ | ---- | ------- | -----------
+message | string | null | Display messages in the notification.
+status | string | '' | The added icon changes depending on the value passed, and the text styles also change. **Possible meaning:** `['primary', 'success', 'danger', 'warning', 'error']`
+timeout | int | 4000 | Time for which notifications will be show.
+cClass | array | null | Additional classes must be specified in the array. **Example:** `['first_class', 'second_class']`
+options | object | default class | The main classes are indicated in the form `{ _mainClass: 'notification', _wrapClass: 'wrap_notifications' }`
+_mainClass | string | notification | Define main notification class.
+_wrapClass | string | wrap_notifications | Define main notification wrapper class.
+
+**JavaScript Call Notifications Example:**
+```JavaScript
+_$().notification({
+        message: `Message !`,
+        status: `success`,
+        timeout: 4000,
+        cClass: ['first_class', 'second_class'],
+        options: {
+            _mainClass: 'notification',
+            _wrapClass: 'wrap_notifications'
+        }
+    });
 ```

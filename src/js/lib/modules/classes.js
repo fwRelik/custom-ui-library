@@ -1,10 +1,10 @@
-// Импорт ядра для использование $ функций.
-// Import core to use $ functions.
-import $ from '../core';
+// Импорт ядра для использование _$ функций.
+// Import core to use _$ functions.
+import _$ from '../core';
 
 // Проверка на наличие Класса.
 // Check for the presence of the Class.
-$.prototype.cont = function (...className) {
+_$.prototype.cont = function (...className) {
     for (let i = 0; i < this.length; i++) {
         if (this[i].classList.contains(...className)) {
             return true;
@@ -16,7 +16,7 @@ $.prototype.cont = function (...className) {
 
 // Добавление класса указанному элементу.
 // Adding a class to the specified element.
-$.prototype.addClass = function (...classNames) {
+_$.prototype.addClass = function (...classNames) {
     for (let i = 0; i < this.length; i++) {
         if (!this[i].classList) {
             continue;
@@ -29,7 +29,7 @@ $.prototype.addClass = function (...classNames) {
 
 // Удаление класса указанному элементу.
 // Removing the class for the specified element.
-$.prototype.removeClass = function (...classNames) {
+_$.prototype.removeClass = function (...classNames) {
     for (let i = 0; i < this.length; i++) {
         if (!this[i].classList) {
             continue;
@@ -42,7 +42,7 @@ $.prototype.removeClass = function (...classNames) {
 
 // Переключение класса указанному элементу.
 // Switch the class to the specified element.
-$.prototype.toggleClass = function (classNames) {
+_$.prototype.toggleClass = function (classNames) {
     for (let i = 0; i < this.length; i++) {
         if (!this[i].classList) {
             continue;

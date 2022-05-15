@@ -1,15 +1,18 @@
-// Импорт ядра для использование $ функций.
-// Import core to use $ functions.
-import $ from '../core';
+// Импорт ядра для использование _$ функций.
+// Import core to use _$ functions.
+import _$ from '../core';
 
 // Реализация слайдера, поверхностная настройка, использовать при наличии верстки в html документе.
 // Implementation of the slider, superficial setting, use if there is layout in the html document.
-$.prototype.carousel = function ({ autoRun: { autoplay = false, duration = 1000 } = {}, options: { round = false } = {} } = {}) {
+
+// Без кнопок в верстке не будет работать. (；^ω^）
+// Without buttons in the layout will not work. (；^ω^）
+_$.prototype.carousel = function ({ options: { round = false, reverse = false, autoplay = false, duration = 4000 } = {} } = {}) {
     for (let i = 0; i < this.length; i++) {
-        const width = window.getComputedStyle($(this[i]).find('.carousel-inner')[0]).width;
-        const slides = $(this[i]).find('.carousel-item').getArray();
-        const slidesField = $(this[i]).find('.carousel-slides')[0];
-        const dots = $(this[i]).find('.carousel-indicators li').getArray();
+        const width = window.getComputedStyle(_$(this[i]).find('.carousel-inner')[0]).width;
+        const slides = _$(this[i]).find('.carousel-item').getArray();
+        const slidesField = _$(this[i]).find('.carousel-slides')[0];
+        const dots = _$(this[i]).find('.carousel-indicators li').getArray();
 
         slidesField.style.width = 100 * slides.length + '%';
         slides.forEach(slide => {
@@ -19,7 +22,7 @@ $.prototype.carousel = function ({ autoRun: { autoplay = false, duration = 1000 
         let offset = 0,
             slideIndex = 0;
 
-        $($(this[i]).find('[data-slide="next"]')[0]).click(e => {
+        _$(_$(this[i]).find('[data-slide="next"]')[0]).click(e => {
             e.preventDefault();
 
             if (offset == (+width.replace(/\D/g, '') * (slides.length - 1))) {
@@ -41,7 +44,7 @@ $.prototype.carousel = function ({ autoRun: { autoplay = false, duration = 1000 
             dots[slideIndex].classList.add('active');
         });
 
-        $($(this[i]).find('[data-slide="prev"]')[0]).click(e => {
+        _$(_$(this[i]).find('[data-slide="prev"]')[0]).click(e => {
             e.preventDefault();
 
             if (offset == 0) {
@@ -59,21 +62,21 @@ $.prototype.carousel = function ({ autoRun: { autoplay = false, duration = 1000 
                 slideIndex--;
             }
 
-            dots.forEach(dot => $(dot).removeClass('active'));
-            $(dots[slideIndex]).addClass('active');
+            dots.forEach(dot => _$(dot).removeClass('active'));
+            _$(dots[slideIndex]).addClass('active');
         });
 
-        const sliderId = $(this[i]).getAttr('id');
-        $(`#${sliderId} .carousel-indicators li`).click(e => {
-            const slideTo = $(e.target).getAttr('data-slide-to');
+        const sliderId = _$(this[i]).getAttr('id');
+        _$(`#${sliderId} .carousel-indicators li`).click(e => {
+            const slideTo = _$(e.target).getAttr('data-slide-to');
 
             slideIndex = slideTo;
             offset = +width.replace(/\D/g, '') * slideTo;
 
             slidesField.style.transform = `translateX(-${offset}px)`;
 
-            dots.forEach(dot => $(dot).removeClass('active'));
-            $(dots[slideIndex]).addClass('active');
+            dots.forEach(dot => _$(dot).removeClass('active'));
+            _$(dots[slideIndex]).addClass('active');
         });
 
         // Авто переключение слайдов, с обработчиками событий.
@@ -85,20 +88,25 @@ $.prototype.carousel = function ({ autoRun: { autoplay = false, duration = 1000 
             // If auto switching works then the slider will be cyclic.
             round = true;
 
-            const nextButton = $(this[i]).find('[data-slide="next"]')[0];
-            _autoRun_(duration, nextButton);
+            let button = 'next';
+            if (reverse) {
+                button = 'prev';
+            }
 
-            $(nextButton).closest('.carousel').on('mouseleave', () => {
-                _autoRun_(duration, nextButton);
+            const focusButton = _$(this[i]).find(`[data-slide="${button}"]`)[0];
+            _autoRun_(duration, focusButton);
+
+            _$(focusButton).closest('.carousel').on('mouseleave', () => {
+                _autoRun_(duration, focusButton);
             });
         }
 
         function _autoRun(duration, trigger) {
             const autoRun = setInterval(() => {
-                $(trigger).click();
+                _$(trigger).click();
             }, duration);
 
-            $(trigger).closest('.carousel').on('mouseenter', () => {
+            _$(trigger).closest('.carousel').on('mouseenter', () => {
                 clearInterval(autoRun);
             });
         }
@@ -107,11 +115,11 @@ $.prototype.carousel = function ({ autoRun: { autoplay = false, duration = 1000 
 
 // Внутри Программная реализация слайдера, нужна только оболочка в html документе для созание и настройки слайдера.
 // Inside Software implementation of the slider, it only needs a wrapper in the html document to create and customize the slider.
-$.prototype.createCarousel = function ({ content: { navigationDot, switching, count, settings }, autoRun: { autoplay = false, duration = 1000 } = {}, options: { round = false } = {} } = {}) {
+_$.prototype.createCarousel = function ({ content: { navigationDot = null, switching = null, count = null, settings = null }, options: { round = false, reverse = false, autoplay = false, duration = 1000 } } = {}) {
     for (let i = 0; i < this.length; i++) {
         let slider = document.createElement('div');
 
-        $(slider).html(`
+        _$(slider).html(`
             <ol class="carousel-indicators">
 
             </ol>
@@ -136,41 +144,42 @@ $.prototype.createCarousel = function ({ content: { navigationDot, switching, co
                 image = document.createElement('img'),
                 dot = document.createElement('li');
 
-            $(item).addClass('carousel-item', ...settings[i][0]);
+            _$(item).addClass('carousel-item', ...settings[i][0]);
 
-            $(image).setAttr('src', settings[i][1]);
-            $(image).setAttr('alt', settings[i][2]);
+            _$(image).setAttr('src', settings[i][1]);
+            _$(image).setAttr('alt', settings[i][2]);
 
-            $(dot).setAttr('data-slide-to', i);
+            _$(dot).setAttr('data-slide-to', i);
             if (i == 0) {
-                $(dot).addClass('active')
+                _$(dot).addClass('active')
             }
 
 
-            $(item).append(image);
+            _$(item).append(image);
 
             items.push(item);
             dots.push(dot);
         }
         if (navigationDot) {
-            $(slider).find('.carousel-indicators').append(...dots);
+            _$(slider).find('.carousel-indicators').append(...dots);
         }
 
+        // Кнопки видны не будут но они остануться в верстке для того что бы основной функционал работал.
+        // The buttons will not be visible, but they will remain in the layout in order for the main functionality to work.
         if (!switching) {
-            $(slider).find('a').visibleHide();
+            _$(slider).find('a').visibleHide();
         }
 
-        $(slider).find('.carousel-slides').append(...items);
+        _$(slider).find('.carousel-slides').append(...items);
 
-        $(this[i]).append(slider);
+        _$(this[i]).append(slider);
 
-        $(this[i]).carousel({
-            autoRun: {
+        _$(this[i]).carousel({
+            options: {
+                round: round,
+                reverse: reverse,
                 autoplay: autoplay,
                 duration: duration
-            },
-            options: {
-                round: round
             }
         });
     }
