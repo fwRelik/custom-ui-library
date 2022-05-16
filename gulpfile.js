@@ -67,6 +67,12 @@ gulp.task("watch", () => {
   gulp.watch("./src/sass/**/*.scss", gulp.parallel("build-sass"));
 });
 
+gulp.task("without_bsync", () => {
+  gulp.watch("./src/index.html", gulp.parallel("copy-html"));
+  gulp.watch("./src/js/**/*.js", gulp.parallel("build-js"));
+  gulp.watch("./src/sass/**/*.scss", gulp.parallel("build-sass"));
+});
+
 gulp.task("build", gulp.parallel("copy-html", "build-js", "build-sass"));
 
 gulp.task("prod", () => {
@@ -104,3 +110,5 @@ gulp.task("prod", () => {
 });
 
 gulp.task("default", gulp.parallel("watch", "build"));
+
+gulp.task("wtb", gulp.parallel("without_bsync", "build"));

@@ -90,13 +90,29 @@ _$('[data-toggle="modal"]').modal();
 ```
 
 > Note: 
-- Simple initialization takes nothing as an argument.
+- Accepts an object with settings.
 #
+
+## Settings Modal
+
+Option | Type | Default | Description
+------ | ---- | ------- | -----------
+_fadeIn | int | 300 | Appearance time in milliseconds.
+_fadeOut | int | 300 | Hiding time in milliseconds.
+
+**JavaScript Initialization Modal Example:**
+```JavaScript
+_$(`[data-toggle="modal"]`).modal({
+    _fadeIn: 300,
+    _fadeOut: 300
+});
+```
+---
 
 ## Dynamic Create Modal
 Can be used when you need to create modals dynamically.
 
-**JavaScript Dunamically Create Modals:**
+**JavaScript Dynamically Create Modals:**
 ```JavaScript
 _$().createModal();
 ```
@@ -114,6 +130,10 @@ body | string | null | Destination description.
 btns | object | { } | Button settings object.
 count | int | null | Number of Buttons.
 settings | array | null | Array to customize each button.
+options | object | { } | Object for settings to the modals.
+_fadeIn | int | 300 | Appearance time in milliseconds.
+_fadeOut | int | 300 | Hiding time in milliseconds.
+_mainClass | string | 'modal' | Main Class.
 
 **HTML Target:**
 ```HTML
@@ -153,6 +173,11 @@ _$('#trigger').click(() => _$('#trigger').createModal({
                     }
                 ]
             ]
+        },
+        options: {
+            _fadeIn: 300,
+            _fadeOut: 300,
+            _mainClass: 'modal'
         }
     });
 );

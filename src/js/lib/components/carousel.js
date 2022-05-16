@@ -113,7 +113,7 @@ _$.prototype.carousel = function ({ options: { round = false, reverse = false, a
     }
 };
 
-// Внутри Программная реализация слайдера, нужна только оболочка в html документе для созание и настройки слайдера.
+// Внутри Программная реализация слайдера, нужна только оболочка в html документе для создание и настройки слайдера.
 // Inside Software implementation of the slider, it only needs a wrapper in the html document to create and customize the slider.
 _$.prototype.createCarousel = function ({ content: { navigationDot = null, switching = null, count = null, settings = null }, options: { round = false, reverse = false, autoplay = false, duration = 1000 } } = {}) {
     for (let i = 0; i < this.length; i++) {
