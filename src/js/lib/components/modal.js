@@ -64,7 +64,7 @@ _$.prototype.modal = function ({ _created = false, _mainClass, _fadeIn = 300, _f
 
 // Внутри Программная реализация создание модальных окон.
 // Internal Implementation of creating modal windows.
-_$.prototype.createModal = function ({ text: { title = null, body = null }, btns: { count = null, settings = null }, options: { _mainClass = 'modal', _fadeIn = 300, _fadeOut = 300 } } = {}) {
+_$.prototype.createModal = function ({ text: { title = null, body = null } = {}, btns: { count = null, settings = null } = {}, options: { _mainClass = 'modal', _fadeIn = 300, _fadeOut = 300 } = {}} = {}) {
     for (let i = 0; i < this.length; i++) {
 
         let modal = document.createElement('div');
