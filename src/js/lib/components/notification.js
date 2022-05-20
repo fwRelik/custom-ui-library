@@ -3,7 +3,7 @@
 import _$ from '../core';
 
 // Создание Уведомлений
-_$.prototype.notification = function ({ message = null, status = '', cClass = null, timeout = 4000, options: { _wrapClass = 'wrap_notifications', _mainClass = 'notification' } } = {}) {
+_$.prototype.notification = function ({ message = null, status = '', cClass = null, timeout = 4000, options: { _wrapClass = 'wrap_notifications', _mainClass = 'notification' } = {} } = {}) {
     if (status === '') status = 'primary';
 
     let wrapField;
