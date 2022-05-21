@@ -2,16 +2,36 @@
 // Import core to use _$ functions.
 import _$ from '../core';
 
+const ErrorCatch = (func, { modal, context } = {}) => {
+    try {
+        func();
+    } catch (e) {
+        const rep = '_replacement_missing_data_attribute';
+
+        if (modal) {
+            _$(modal).setAttr('id', rep);
+            _$(context).setAttr('data-target', `#${rep}`);
+        }
+
+        console.error(`Use the date attribute on the modal trigger in the format: [data-target="#example"]`);
+    }
+}
+
 // Реализация привязки и активизации триггеров с модальными окнами по дата атрибуту.
 // Implementation of binding and activation of triggers with modal windows by date attribute.
-_$.prototype.modal = function ({ _created = false, _mainClass, _fadeIn = 300, _fadeOut = 300 } = {}) {
+_$.prototype.modal = function ({ _created = false, _mainClass = 'modal', _fadeIn = 300, _fadeOut = 300 } = {}) {
     for (let i = 0; i < this.length; i++) {
-        const target = _$(this[i]).getAttr('data-target');
+        let target = _$(this[i]).getAttr('data-target');
+
+        if (!target) {
+            ErrorCatch(() => { _ });
+            return;
+        }
 
         if (!_mainClass) {
             _mainClass = _$(target).getAttr('class').split(' ')[0];
         }
-        
+
         _$(this[i]).click((e) => {
             e.preventDefault();
             _$(target).fadeIn(_fadeIn);
@@ -64,12 +84,14 @@ _$.prototype.modal = function ({ _created = false, _mainClass, _fadeIn = 300, _f
 
 // Внутри Программная реализация создание модальных окон.
 // Internal Implementation of creating modal windows.
-_$.prototype.createModal = function ({ text: { title = null, body = null } = {}, btns: { count = null, settings = null } = {}, options: { _mainClass = 'modal', _fadeIn = 300, _fadeOut = 300 } = {}} = {}) {
+_$.prototype.createModal = function ({ text: { title = null, body = null } = {}, btns: { count = null, settings = null } = {}, options: { _mainClass = 'modal', _fadeIn = 300, _fadeOut = 300 } = {} } = {}) {
     for (let i = 0; i < this.length; i++) {
 
         let modal = document.createElement('div');
         _$(modal).addClass(`${_mainClass}`);
-        _$(modal).setAttr('id', _$(this[i]).getAttr('data-target').slice(1));
+
+        ErrorCatch(() => _$(modal).setAttr('id', _$(this[i]).getAttr('data-target').slice(1)), { modal, context: this[i] })
+
 
         const buttons = [];
         for (let j = 0; j < count; j++) {
