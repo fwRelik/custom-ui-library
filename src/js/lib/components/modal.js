@@ -13,23 +13,24 @@ const ErrorCatch = (func, { modal, context } = {}) => {
             _$(context).setAttr('data-target', `#${rep}`);
         }
 
-        console.error(`Use the date attribute on the modal trigger in the format: [data-target="#example"]`);
+        console.error(`Use the date attribute in the modal trigger in the format: [data-target="#example"] or don't pass the selector at all when calling modals, in which case just use this syntax: _$().createModal(Object);`);
     }
 }
 
 // Реализация привязки и активизации триггеров с модальными окнами по дата атрибуту.
 // Implementation of binding and activation of triggers with modal windows by date attribute.
-_$.prototype.modal = function ({ _created = false, _mainClass = 'modal', _fadeIn = 300, _fadeOut = 300 } = {}) {
+_$.prototype.modal = function ({
+    _created = false,
+    _mainClass = 'modal',
+    _fadeIn = 300,
+    _fadeOut = 300
+} = {}) {
     for (let i = 0; i < this.length; i++) {
         let target = _$(this[i]).getAttr('data-target');
 
         if (!target) {
             ErrorCatch(() => { _ });
             return;
-        }
-
-        if (!_mainClass) {
-            _mainClass = _$(target).getAttr('class').split(' ')[0];
         }
 
         _$(this[i]).click((e) => {
@@ -84,14 +85,32 @@ _$.prototype.modal = function ({ _created = false, _mainClass = 'modal', _fadeIn
 
 // Внутри Программная реализация создание модальных окон.
 // Internal Implementation of creating modal windows.
-_$.prototype.createModal = function ({ text: { title = null, body = null } = {}, btns: { count = null, settings = null } = {}, options: { _mainClass = 'modal', _fadeIn = 300, _fadeOut = 300 } = {} } = {}) {
-    for (let i = 0; i < this.length; i++) {
+_$.prototype.createModal = function ({
+    text: {
+        title = null,
+        body = null
+    } = {},
+    btns: {
+        count = null,
+        settings = null } = {},
+    options: {
+        _mainClass = 'modal',
+        _fadeIn = 300,
+        _fadeOut = 300 } = {}
+} = {}) {
+    if (!this.length) {
+        const fakeContext = document.createElement('div');
+        fakeContext.setAttribute('data-target', '#_replacing_trigger');
 
+        this[0] = fakeContext;
+        this.length = 1;
+    }
+
+    for (let i = 0; i < this.length; i++) {
         let modal = document.createElement('div');
         _$(modal).addClass(`${_mainClass}`);
 
         ErrorCatch(() => _$(modal).setAttr('id', _$(this[i]).getAttr('data-target').slice(1)), { modal, context: this[i] })
-
 
         const buttons = [];
         for (let j = 0; j < count; j++) {
