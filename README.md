@@ -146,7 +146,8 @@ _mainClass | string | 'modal' | Main Class.
 
 **JavaScript Dynamically Create Modals Example:**
 ```JavaScript
-_$('#trigger').click(() => _$('#trigger').createModal({
+_$('#trigger').on('click', () => {
+    _$().createModal({
         text: {
             title: 'Title',
             body: 'Body Description'
@@ -180,7 +181,7 @@ _$('#trigger').click(() => _$('#trigger').createModal({
             _mainClass: 'modal'
         }
     });
-);
+});
 ```
 
 ---
