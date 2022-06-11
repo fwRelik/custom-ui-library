@@ -414,7 +414,7 @@ _$('#example').createCarousel({
 
 ## Notifications Example
 
-> Notifications use Font Awesome Icons, you can find [them here.](https://github.com/fwmiva/ifo)
+> Notifications use Font Awesome Icons, you can find [them here.](https://github.com/fwRelik/ifo)
 
 **JavaScript Call Notifications:**
 ```JavaScript
