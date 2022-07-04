@@ -116,6 +116,7 @@ Can be used when you need to create modals dynamically.
 ```JavaScript
 _$().createModal();
 ```
+
 > Note:
 - Accepts an object with settings.
 #
@@ -420,6 +421,7 @@ _$('#example').createCarousel({
 ```JavaScript
 _$().notification();
 ```
+
 > Note:
 - Accepts an object with settings.
 #
